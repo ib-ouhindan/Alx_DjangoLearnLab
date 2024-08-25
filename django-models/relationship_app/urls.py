@@ -5,6 +5,8 @@ from django.urls import path
 from .views import CustomLoginView, CustomLogoutView, RegisterView
 from django.urls import path
 from .views import admin_view, librarian_view, member_vie
+from .views import admin_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('relationship_app/', include('relationship_app.urls')),
