@@ -9,14 +9,10 @@ urlpatterns = [
 ]
 
 urlpatterns = [
-    # URL pattern for the login view
     path('login/', CustomLoginView.as_view(), name='login'),
     
-    # URL pattern for the logout view
     path('logout/', CustomLogoutView.as_view(), name='logout'),
-    
-    # URL pattern for the registration view
+
     path('register/', RegisterView.as_view(), name='register'),
     
-    # Add other URL patterns here if needed
 ]
