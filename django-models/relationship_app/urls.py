@@ -3,6 +3,8 @@ from django.urls import path, include
 from .views import list_books,LibraryDetailView
 from django.urls import path
 from .views import CustomLoginView, CustomLogoutView, RegisterView
+from django.urls import path
+from .views import admin_view, librarian_view, member_vie
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('relationship_app/', include('relationship_app.urls')),
@@ -17,3 +19,10 @@ urlpatterns = [
     
 ]
 ["views.register", "LogoutView.as_view(template_name=", "LoginView.as_view(template_name="]
+w
+
+urlpatterns = [
+    path('admin/', admin_view, name='admin_view'),
+    path('librarian/', librarian_view, name='librarian_view'),
+    path('member/', member_view, name='member_view'),
+]
