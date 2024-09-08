@@ -11,7 +11,7 @@ class BookAPITests(APITestCase):
             title="Harry Potter", 
             publication_year=1997, 
             author=self.author
-        )
+        )self.client.login
         self.book_url = reverse('book-detail', kwargs={'pk': self.book.id})
         self.books_url = reverse('book-list')
 
