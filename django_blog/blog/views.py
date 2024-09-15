@@ -17,7 +17,7 @@ from .forms import PostForm
 from django.views.generic import CreateView, UpdateView, DeleteView
 from .models import Post, Comment
 from .forms import CommentForm
-
+from django.db.models import Q
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
@@ -132,3 +132,16 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         comment = self.get_object()
         return self.request.user == comment.author
+def search(request):
+    query = request.GET.get('q')
+    if query:
+        posts = Post.objects.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(tags__name__icontains=query)
+        ).distinct()
+    else:
+        posts = Post.objects.none()
+
+    context = {'posts': posts, 'query': query}
+    return render(request, 'blog/search_results.html', context)
