@@ -18,6 +18,9 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from .models import Post, Comment
 from .forms import CommentForm
 from django.db.models import Q
+from taggit.models import Tag
+from django.views.generic import ListView
+
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
@@ -145,3 +148,12 @@ def search(request):
 
     context = {'posts': posts, 'query': query}
     return render(request, 'blog/search_results.html', context)
+
+
+class PostListViewByTag(ListView):
+    model = Post
+    template_name = 'blog/post_list_by_tag.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Post.objects.filter(tags__slug=self.kwargs.get('tag_slug'))
