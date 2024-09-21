@@ -39,7 +39,7 @@ def user_feed(request):
     serializer = PostSerializer(posts, many=True)
     return Response(serializer.data)
 
-
+#permissions.IsAuthenticated
 @api_view(['POST'])
 def like_post(request, post_id):
     post = Post.objects.get(id=post_id)
