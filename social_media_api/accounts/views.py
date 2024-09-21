@@ -13,7 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import CustomUser
 from .serializers import RegisterSerializer, UserSerializer
 from rest_framework.authtoken.models import Token
-
+permissions.IsAuthenticated
 @api_view(['POST'])
 def register_user(request):
     serializer = UserSerializer(data=request.data)
@@ -21,7 +21,7 @@ def register_user(request):
         user = serializer.save()
         return Response({"token": user.token}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+CustomUser.objects.all()
 @api_view(['POST'])
 def login_user(request):
     username = request.data.get('username')
