@@ -13,6 +13,6 @@ urlpatterns = router.urls
 
 urlpatterns = [
     path('feed/', user_feed, name='user-feed'),
-    path('posts/<int:post_id>/like/', like_post),
-    path('posts/<int:post_id>/unlike/', unlike_post),
+    path('posts/<int:pk>/like/', like_post),
+    path('posts/<int:pk>/unlike/', unlike_post),
 ]
