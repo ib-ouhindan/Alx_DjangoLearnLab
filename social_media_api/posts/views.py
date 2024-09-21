@@ -31,7 +31,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-
+#"permissions.IsAuthenticated", "generics.get_object_or_404(Post, pk=pk)", "Like.objects.get_or_create(user=request.user, post=post)", "Notification.objects.create"]
 @api_view(['GET'])
 def user_feed(request):
     followed_users = request.user.following.all()
