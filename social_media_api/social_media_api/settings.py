@@ -19,7 +19,18 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+SECURE_BROWSER_XSS_FILTER = True  # Enables XSS filtering
+X_FRAME_OPTIONS = 'DENY'  # Prevents clickjacking
+SECURE_SSL_REDIRECT = True  # Redirect all HTTP to HTTPS
 
+# Additional security settings for production environment
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent the browser from trying to guess the content type
+SECURE_HSTS_SECONDS = 31536000  # Enforce HTTP Strict Transport Security (HSTS) for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allows domain to be included in browsers' preload list
+
+CSRF_COOKIE_SECURE = True  # Ensure CSRF cookie is only sent over HTTPS
+SESSION_COOKIE_SECURE = True  # Ensure session cookie is only sent over HTTPS
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
