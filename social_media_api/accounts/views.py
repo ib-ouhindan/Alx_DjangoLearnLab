@@ -46,3 +46,10 @@ def unfollow_user(request, user_id):
     user_to_unfollow = get_object_or_404(CustomUser, id=user_id)
     request.user.following.remove(user_to_unfollow)
     return Response({'message': 'You have unfollowed this user.'}, status=status.HTTP_200_OK)
+ class ProfileView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
