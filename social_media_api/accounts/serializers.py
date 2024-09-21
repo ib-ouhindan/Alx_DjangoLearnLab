@@ -1,16 +1,23 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from rest_framework.authtoken.models import Token
 
 from rest_framework import serializers
 from .models import CustomUser
 
 class UserSerializer(serializers.ModelSerializer):
-    followers_count = serializers.IntegerField(source='followers.count', read_only=True)
-    following_count = serializers.IntegerField(source='following.count', read_only=True)
+    token = serializers.CharField(read_only=True)
 
     class Meta:
-        model = CustomUser
-        fields = ['id', 'username', 'bio', 'profile_picture', 'followers_count', 'following_count']
+        model = get_user_model()
+        fields = ['id', 'username', 'email', 'password', 'token']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = get_user_model().objects.create_user(**validated_data)
+        token, created = Token.objects.create(user=user)
+        user.token = token.key
+        return user
 
 
 class RegisterSerializer(serializers.ModelSerializer):
