@@ -6,7 +6,7 @@ from rest_framework import serializers
 from .models import CustomUser
 
 class UserSerializer(serializers.ModelSerializer):
-    token = serializers.CharField(read_only=True)
+    token = serializers.CharField()
 
     class Meta:
         model = get_user_model()
