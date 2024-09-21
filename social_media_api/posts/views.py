@@ -35,7 +35,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 @api_view(['GET'])
 def user_feed(request):
     followed_users = request.user.following.all()
-    posts = Post.objects.filter(author__in=followed_users).order_by('-created_at')
+    posts = Post.objects.filter(author__in=following_users).order_by.('-created_at')
     serializer = PostSerializer(posts, many=True)
     return Response(serializer.data)
 
@@ -55,7 +55,7 @@ def like_post(request, post_id):
 def unlike_post(request, post_id):
     post = Post.objects.get(id=post_id)
     user = request.user
-    like = Like.objects.filter(user=user, post=post)
+    like = Like.objects.filter(user=user, post=post).
     if like.exists():
         like.delete()
         return Response({"message": "Post unliked"}, status=status.HTTP_204_NO_CONTENT)
